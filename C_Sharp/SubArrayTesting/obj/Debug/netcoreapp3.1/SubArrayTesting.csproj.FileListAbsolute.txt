@@ -1,0 +1,11 @@
+C:\Users\horeth\Code\Github_hnoraa\Optimization\SubArrayTesting\bin\Debug\netcoreapp3.1\SubArrayTesting.exe
+C:\Users\horeth\Code\Github_hnoraa\Optimization\SubArrayTesting\bin\Debug\netcoreapp3.1\SubArrayTesting.deps.json
+C:\Users\horeth\Code\Github_hnoraa\Optimization\SubArrayTesting\bin\Debug\netcoreapp3.1\SubArrayTesting.runtimeconfig.json
+C:\Users\horeth\Code\Github_hnoraa\Optimization\SubArrayTesting\bin\Debug\netcoreapp3.1\SubArrayTesting.runtimeconfig.dev.json
+C:\Users\horeth\Code\Github_hnoraa\Optimization\SubArrayTesting\bin\Debug\netcoreapp3.1\SubArrayTesting.dll
+C:\Users\horeth\Code\Github_hnoraa\Optimization\SubArrayTesting\bin\Debug\netcoreapp3.1\SubArrayTesting.pdb
+C:\Users\horeth\Code\Github_hnoraa\Optimization\SubArrayTesting\obj\Debug\netcoreapp3.1\SubArrayTesting.csprojAssemblyReference.cache
+C:\Users\horeth\Code\Github_hnoraa\Optimization\SubArrayTesting\obj\Debug\netcoreapp3.1\SubArrayTesting.AssemblyInfoInputs.cache
+C:\Users\horeth\Code\Github_hnoraa\Optimization\SubArrayTesting\obj\Debug\netcoreapp3.1\SubArrayTesting.AssemblyInfo.cs
+C:\Users\horeth\Code\Github_hnoraa\Optimization\SubArrayTesting\obj\Debug\netcoreapp3.1\SubArrayTesting.dll
+C:\Users\horeth\Code\Github_hnoraa\Optimization\SubArrayTesting\obj\Debug\netcoreapp3.1\SubArrayTesting.pdb
