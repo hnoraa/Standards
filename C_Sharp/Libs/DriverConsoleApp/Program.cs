@@ -48,7 +48,7 @@ namespace DriverConsoleApp
             timeTester.Mark($"List.GetRange() test");
 
             timeTester.End();
-            timeTester.Report();
+            timeTester.Report(true);
         }
     }
 }
