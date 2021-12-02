@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SubArrayTesting
+namespace BenchMark
 {
     /// <summary>
     /// Class to test duration of processes/algorithms

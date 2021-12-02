@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SubArrayTesting
+namespace Extension
 {
     /// <summary>
     /// Extension class with Generic methods

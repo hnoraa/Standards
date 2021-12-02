@@ -1,8 +1,7 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
+﻿using Extension;
+using System;
 
-namespace SubArrayTesting
+namespace DriverConsoleApp
 {
     public class Program
     {
@@ -14,14 +13,14 @@ namespace SubArrayTesting
 
         public static void Reset()
         {
-            Extension.ResetArray(testArray);
+            Extension.Extension.ResetArray(testArray);
             offset = 5; // testArray[5] = 6
             length = testArray.Length - offset;
         }
 
         public static void Main(string[] args)
         {
-            BenchMark timeTester = new BenchMark();
+            BenchMark.BenchMark timeTester = new BenchMark.BenchMark();
 
             Reset();
             Console.WriteLine($"Starting tests with array of length: {testArray.Length}, offset of: {offset} and length of: {length}");

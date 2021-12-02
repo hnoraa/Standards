@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BenchMark", "BenchMark\BenchMark.csproj", "{0122DE14-F1DD-42F6-A24E-7A378C7725DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BenchMark", "BenchMark\BenchMark.csproj", "{0122DE14-F1DD-42F6-A24E-7A378C7725DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extension", "Extension\Extension.csproj", "{61C4B472-C02B-4B0A-AA17-5A5E58624B1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Extension", "Extension\Extension.csproj", "{61C4B472-C02B-4B0A-AA17-5A5E58624B1C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Drivers", "Drivers", "{CC3E7AC3-0164-4276-BF85-5B8795ED4B41}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriverConsoleApp", "DriverConsoleApp\DriverConsoleApp.csproj", "{31D644B2-F666-40FD-B901-D158F6F789F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,9 +25,16 @@ Global
 		{61C4B472-C02B-4B0A-AA17-5A5E58624B1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61C4B472-C02B-4B0A-AA17-5A5E58624B1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61C4B472-C02B-4B0A-AA17-5A5E58624B1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31D644B2-F666-40FD-B901-D158F6F789F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31D644B2-F666-40FD-B901-D158F6F789F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31D644B2-F666-40FD-B901-D158F6F789F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31D644B2-F666-40FD-B901-D158F6F789F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{31D644B2-F666-40FD-B901-D158F6F789F8} = {CC3E7AC3-0164-4276-BF85-5B8795ED4B41}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F2255E19-93B4-46FD-8224-3D80D761C220}
