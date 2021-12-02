@@ -91,81 +91,78 @@ namespace BenchMark
             return ts.TotalSeconds;
         }
 
+        private void ReportText()
+        {
+            Console.WriteLine("=====================================================================================");
+            Console.WriteLine("Bench Mark Test Report");
+            Console.WriteLine($"\tTest Start:\t{_start.ToString("MM/dd/yyyy HH:mm:ss.FFFFFFF")}\n\tTest End:\t{_end.ToString("MM/dd/yyyy HH:mm:ss.FFFFFFF")}");
+            Console.WriteLine("=====================================================================================");
+
+            if (_marks.Count() > 1)
+            {
+                double longest = _marks.Max(x => x.seconds);
+                double shortest = _marks.Min(x => x.seconds);
+                Console.WriteLine("Marks");
+
+                _marks.ForEach(d => Console.WriteLine($"\tMark -\t\t{d.message}\n\tDuration -\t{d.seconds:0.000000}s"));
+
+                Console.WriteLine("=====================================================================================");
+                Console.WriteLine("Statistics");
+                Console.WriteLine($"Longest Mark:\t{longest:0.000000}s" +
+                    $"\t({_marks.FirstOrDefault(s => s.seconds == longest).message})");
+                Console.WriteLine($"Shortest Mark:\t{shortest:0.000000}s" +
+                    $"\t({_marks.FirstOrDefault(s => s.seconds == shortest).message})");
+                Console.WriteLine($"Average:\t{_marks.Average(x => x.seconds):0.000000}s");
+
+                Console.WriteLine("=====================================================================================");
+            }
+
+            Console.WriteLine($"Overall Duration {Duration():0.000000}s");
+        }
+
         /// <summary>
         /// Reports the durations with statistics
         /// </summary>
         /// <param name="toFile">Redirect Console output to a file</param>        
         public void Report(bool toFile = false)
         {
-            double longest = 0.0;
-            string longestM = "";
-            double shortest = 0.0;
-            string shortestM = "";
-            double average = 0.0;
-
-            string line = "=====================================================================================";
-
-            // used for writing to a report file
-            FileStream ostrm;
-            StreamWriter writer;
-            TextWriter oldOut = Console.Out;
-            string fileName = $"./Report_{DateTime.Now.Ticks}.txt";
-
-            try
-            {
-                ostrm = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.Write);
-                writer = new StreamWriter(ostrm);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"Cannot open {fileName} for writing");
-                Console.WriteLine(e.Message);
-                return;
-            }
-
             if (toFile)
             {
+                // used for writing to a report file
+                FileStream ostrm;
+                StreamWriter writer;
+                TextWriter oldOut = Console.Out;
+
+                try
+                {
+                    ostrm = new FileStream($"./Report_{DateTime.Now.Ticks}.txt", FileMode.OpenOrCreate, FileAccess.Write);
+                    writer = new StreamWriter(ostrm);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine($"Cannot open or create report file for writing");
+                    Console.WriteLine(e.Message);
+
+                    // write Console report and quit
+                    ReportText();
+
+                    return;
+                }
+
                 // this redirects the console to the output
                 Console.SetOut(writer);
-            }
 
-            Console.WriteLine(line);
-            Console.WriteLine("Bench Mark Test Report");
-            Console.WriteLine($"\tTest Start:\t{_start.ToString("MM/dd/yyyy HH:mm:ss")}\t({TimeSpan.FromTicks(_start.Ticks).TotalSeconds}s)" +
-                $"\n\tTest End:\t{_end.ToString("MM/dd/yyyy HH:mm:ss")}\t({TimeSpan.FromTicks(_end.Ticks).TotalSeconds}s)");
-            Console.WriteLine(line);
+                ReportText();
 
-            if (_marks.Count() > 1)
-            {
-                Console.WriteLine("Marks");
-
-                _marks.ForEach(d => Console.WriteLine($"\tMark -\t\t{d.message}\n\tDuration -\t{d.seconds:0.000000}"));
-
-                longest = _marks.Max(x => x.seconds);
-                shortest = _marks.Min(x => x.seconds);
-                average = _marks.Average(x => x.seconds);
-
-                longestM = _marks.FirstOrDefault(s => s.seconds == longest).message;
-                shortestM = _marks.FirstOrDefault(s => s.seconds == shortest).message;
-
-                Console.WriteLine(line);
-                Console.WriteLine("Statistics");
-                Console.WriteLine($"Longest Mark:\t{longest:0.000000}s\t({longestM})");
-                Console.WriteLine($"Shortest Mark:\t{shortest:0.000000}s\t({shortestM})");
-                Console.WriteLine($"Average:\t{average:0.000000}s");
-
-                Console.WriteLine(line);
-            }
-
-            Console.WriteLine($"Overall Duration {Duration()}s");
-
-            if(toFile)
-            {
                 // redirect back to Console output
                 Console.SetOut(oldOut);
                 writer.Close();
                 ostrm.Close();
                 Console.WriteLine("Report written to file successfully.");
+            }
+            else
+            {
+                ReportText();
             }
         }
     }
