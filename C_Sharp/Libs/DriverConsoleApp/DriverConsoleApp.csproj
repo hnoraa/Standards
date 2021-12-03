@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Alg\Alg.csproj" />
     <ProjectReference Include="..\BenchMark\BenchMark.csproj" />
     <ProjectReference Include="..\Extension\Extension.csproj" />
   </ItemGroup>
