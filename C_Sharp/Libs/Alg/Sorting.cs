@@ -1,4 +1,6 @@
-﻿///https://www.geeksforgeeks.org/fundamentals-of-algorithms/
+﻿/// Sources: 
+/// https://www.geeksforgeeks.org/fundamentals-of-algorithms/
+/// https://travcav.medium.com/why-reverse-loops-are-faster-a09d65473006
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -181,26 +183,75 @@ namespace Alg
         /// <returns>The array sorted</returns>
         public static int[] MergeSort(this int[] array, int left, int right)
         {
-            // edge cases
-            if (array is null || array.Length == 0)
-                return null;
-
-            if (array.Length == 1)
-                return array;
-
             if (right > left)
             {
                 int middle = left + (right - left) / 2;
-                int[] leftArray = new int[middle];
-                int[] rightArray = new int[middle];
-
-                Array.Copy(array, left, leftArray, 0, middle);
-                Array.Copy(array, middle, rightArray, 0, middle);
-
-                leftArray.MergeSort(left, middle);
-                rightArray.MergeSort(middle + 1, right);
+                array.MergeSort(left, middle);
+                array.MergeSort(middle + 1, right);
+                array.Merge(left, middle, right);
             }
+
             return array;
+        }
+
+        /// <summary>
+        /// Merge for merge sort. This is the Conquer of the Divide and Conquer of Merge Sort
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="left">The left bound of the array</param>
+        /// <param name="middle">The middle of the array</param>
+        /// <param name="right">The right of the array</param>
+        private static void Merge(this int[] array, int left, int middle, int right)
+        {
+            int n1 = middle - left + 1;
+            int n2 = right - middle;
+            int[] leftArray = new int[n1];
+            int[] rightArray = new int[n2];
+            int i, j = 0;
+
+            for (i = 0; i < n1; i++)
+            {
+                leftArray[i] = array[left + i];
+            }
+
+            for (j = 0; j < n2; j++)
+            {
+                rightArray[j] = array[middle + j + 1];
+            }
+
+            i = j = 0;
+            int k = left;
+
+            // initial copy
+            while (i < n1 && j < n2)
+            {
+                if (leftArray[i] <= rightArray[j])
+                {
+                    array[k] = leftArray[i];
+                    i++;
+                }
+                else
+                {
+                    array[k] = rightArray[j];
+                    j++;
+                }
+                k++;
+            }
+
+            // copy over remainders
+            while (i < n1)
+            {
+                array[k] = leftArray[i];
+                i++;
+                k++;
+            }
+
+            while (j < n2)
+            {
+                array[k] = rightArray[j];
+                j++;
+                k++;
+            }
         }
     }
 }
