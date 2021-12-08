@@ -193,17 +193,18 @@ namespace ADTDriverConsoleApp
         public void RemovePoint(int id)
         {
             MapPoint delPoint = points.FirstOrDefault(x => x.id == id);
+            int count = points.Count;
 
             if (delPoint != null)
             {
                 points.Remove(delPoint);
 
-                foreach (MapPoint point in points)
+                for (int i = count; i >= 0; i--)
                 {
-                    int? delId = point.connections.FirstOrDefault(x => x == id);
+                    int? delId = points[i].connections.FirstOrDefault(x => x == id);
                     if (delId != null)
                     {
-                        point.RemoveConnection(id);
+                        points[i].RemoveConnection(id);
                     }
                 }
             }

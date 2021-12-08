@@ -6,7 +6,7 @@ namespace Alg
 {
     public static class Searching
     {
-        public static int? LinearSearch(int[] array, int searchTerm)
+        public static int? LinearSearch(this int[] array, int searchTerm)
         {
             int length = array.Length;
             int i = 0;
@@ -23,7 +23,6 @@ namespace Alg
 
         public static int? BinarySearch(this int[] array, int searchTerm, int left, int right)
         {
-            int length = array.Length;
             int middle = left + (right - left) / 2;
 
             if(right >= left)
