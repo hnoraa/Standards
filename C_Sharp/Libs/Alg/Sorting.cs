@@ -253,5 +253,45 @@ namespace Alg
                 k++;
             }
         }
+
+        /// <summary>
+        /// Heap sort:
+        /// Heap sort is a comparison-based sorting technique based on Binary Heap data structure. 
+        /// It is similar to selection sort where we first find the minimum element and place 
+        /// the minimum element at the beginning. We repeat the same process for the remaining elements.
+        /// </summary>
+        /// <param name="array">The un-sorted array</param>
+        /// <returns>The array sorted</returns>
+        public static int[] HeapSort(this int[] array)
+        {
+            int largest = 0;
+
+            for(int i = 0; i <= array.Length; i++) {
+                Heapify(array, i, largest);
+            }
+
+            return array;
+        }
+
+        private static void Heapify(this int[] array, int index, int largest)
+        {
+            int root = array[index];
+
+            if (array[2 * index + 1] > array[2 * index + 2])
+            {
+                largest = 2 * index + 1;
+            }
+            else
+            {
+                largest = 2 * index + 2;
+            }
+
+            if(root != largest)
+            {
+                int temp = root;
+                root = largest;
+                largest = temp;
+            }
+        }
     }
 }
