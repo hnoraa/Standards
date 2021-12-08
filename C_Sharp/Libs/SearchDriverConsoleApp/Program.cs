@@ -5,10 +5,13 @@ namespace SearchDriverConsoleApp
 {
     public static class Program
     {
-        public static int[] testArray = { 1, 2, 3, 4, 5, 6, 7, 8 };
+        public static int[] testArray = { 1, 2, 3, 4, 5, 0, 7, 8 };
 
         public static void Main(string[] args)
         {
+            testArray.BubbleSort();
+            int length = testArray.Length - 1;
+
             Console.WriteLine($"Array: {String.Join(",", testArray)}");
             string value = "";
             int searchItem = 0;
@@ -26,7 +29,7 @@ namespace SearchDriverConsoleApp
                         continue;
                     }
 
-                    int? retVal = Searching.LinearSearch(testArray, searchItem);
+                    int? retVal = Searching.BinarySearch(testArray, searchItem, 0, length);
                     if (retVal == null)
                     {
                         Console.WriteLine($"{searchItem} not found in testArray");

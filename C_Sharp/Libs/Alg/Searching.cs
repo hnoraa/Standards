@@ -20,5 +20,27 @@ namespace Alg
             }
             return null;
         }
+
+        public static int? BinarySearch(this int[] array, int searchTerm, int left, int right)
+        {
+            int length = array.Length;
+            int middle = left + (right - left) / 2;
+
+            if(right >= left)
+            {
+                if (array[middle] == searchTerm)
+                {
+                    return middle;
+                }
+                
+                if (array[middle] > searchTerm)
+                {
+                    return BinarySearch(array, searchTerm, left, middle - 1);
+                }
+                return BinarySearch(array, searchTerm, middle + 1, right);
+            }
+
+            return null;
+        }
     }
 }
