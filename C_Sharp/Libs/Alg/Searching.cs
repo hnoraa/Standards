@@ -41,5 +41,35 @@ namespace Alg
 
             return null;
         }
+
+        public static int? JumpSearch(this int[] array, int searchTerm)
+        {
+            int size = array.Length;
+            int step = Convert.ToInt32(Math.Floor(Math.Sqrt(size)));
+            int start = 0;
+            int end = step;
+
+            while(array[end] <= searchTerm && end < size)
+            {
+                start = end;
+                end += step;
+
+                if (end > size - 1)
+                {
+                    end = size;
+                    break;
+                }
+            }
+
+            for(int i = start; i < end; i++)
+            {
+                if(array[i] == searchTerm)
+                {
+                    return i;
+                }
+            }
+
+            return null;
+        }
     }
 }

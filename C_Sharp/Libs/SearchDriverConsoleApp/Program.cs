@@ -16,6 +16,9 @@ namespace SearchDriverConsoleApp
             string value = "";
             int searchItem = 0;
 
+            int step = Convert.ToInt32(Math.Floor(Math.Sqrt(length)));
+            int x = Math.Min(step, length) - 1;
+
             while (value != "q")
             {
                 Console.WriteLine("Enter a search value (type 'q' to quit): ");
@@ -29,7 +32,7 @@ namespace SearchDriverConsoleApp
                         continue;
                     }
 
-                    int? retVal = Searching.BinarySearch(testArray, searchItem, 0, length);
+                    int? retVal = Searching.JumpSearch(testArray, searchItem);
                     if (retVal == null)
                     {
                         Console.WriteLine($"{searchItem} not found in testArray");
