@@ -5,19 +5,15 @@ namespace SearchDriverConsoleApp
 {
     public static class Program
     {
-        public static int[] testArray = { 1, 2, 3, 4, 5, 0, 7, 8 };
+        public static int[] testArray = { 1, 2, 3, 4, 5, 0, 7, 8, 700, 41 };
 
         public static void Main(string[] args)
         {
-            testArray.BubbleSort();
-            int length = testArray.Length - 1;
+            testArray.InsertionSort();
 
             Console.WriteLine($"Array: {String.Join(",", testArray)}");
             string value = "";
             int searchItem = 0;
-
-            int step = Convert.ToInt32(Math.Floor(Math.Sqrt(length)));
-            int x = Math.Min(step, length) - 1;
 
             while (value != "q")
             {
@@ -32,7 +28,7 @@ namespace SearchDriverConsoleApp
                         continue;
                     }
 
-                    int? retVal = Searching.JumpSearch(testArray, searchItem);
+                    int? retVal = Searching.InterpolationSearch(testArray, searchItem);
                     if (retVal == null)
                     {
                         Console.WriteLine($"{searchItem} not found in testArray");

@@ -31,7 +31,7 @@ namespace Alg
             if (array.Length == 1)
                 return array;
 
-            int length = array.Length - 1;  // array.Length is an expensive instruction, the for loop will execute it every time it iterates
+            int length = array.Length;  // array.Length is an expensive instruction, the for loop will execute it every time it iterates
 
             // O(n^2) - 2 for loops
             for (int i = 0; i < length; i++)
@@ -94,7 +94,7 @@ namespace Alg
 
             for (int i = 0; i < length; i++)
             {
-                bool swapped = false;
+                //bool swapped = false;
                 for(int j = i + 1; j < length; j++)
                 {
                     if (array[i] > array[j])
@@ -102,15 +102,15 @@ namespace Alg
                         int temp = array[i];
                         array[i] = array[j];
                         array[j] = temp;
-                        swapped = true;
+                        //swapped = true;
                     }
                 }
 
-                if(swapped == false)
-                {
-                    // optimization, this will break out of the loop if there are no swaps to be performed
-                    break;
-                }
+                //if(swapped == false)
+                //{
+                //    // optimization, this will break out of the loop if there are no swaps to be performed
+                //    break;
+                //}
             }
 
             return array;

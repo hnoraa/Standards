@@ -71,5 +71,47 @@ namespace Alg
 
             return null;
         }
+
+        public static int? InterpolationSearch(this int[] array, int searchTerm)
+        {
+            int low = 0;
+            int high = array.Length - 1;
+            int pos = 0;
+            int i = 0;
+
+            while(low <= high && searchTerm >= array[low] && searchTerm <= array[high])
+            {
+                Console.WriteLine($"pos: {pos}");
+
+                if(low == high)
+                {
+                    if(array[low] == searchTerm)
+                    {
+                        return low;
+                    }
+                    return null;
+                }
+                //pos = low + (searchTerm - array[low]) * (high - low) / (array[high] - array[low]);
+                pos = low + (((high - low) / (array[high] - array[low])) * (searchTerm - array[low]));
+
+                if (array[pos] == searchTerm)
+                {
+                    return pos;
+                }
+                else
+                {
+                    if (array[pos] < searchTerm)
+                    {
+                        low = pos + 1;
+                    }
+                    else
+                    {
+                        high = pos - 1;
+                    }
+                }
+            }
+
+            return null;
+        }
     }
 }
