@@ -27,21 +27,20 @@ namespace DriverConsoleApp
             timeTester.Start();
 
             // insertion sort
-            array1.InsertionSort();
+            array1.HeapSort();
             Console.WriteLine($"{String.Join(",", array1)}");
 
-            array2.InsertionSort();
+            array2.HeapSort();
             Console.WriteLine($"{String.Join(",", array2)}");
 
-            array3.InsertionSort();
+            array3.HeapSort();
             Console.WriteLine($"{String.Join(",", array3)}");
 
-            array4.InsertionSort();
+            array4.HeapSort();
             Console.WriteLine($"{String.Join(",", array4)}");
 
-            array5.InsertionSort();
+            array5.HeapSort();
             Console.WriteLine($"{String.Join(",", array5)}");
-
 
             timeTester.End();
             timeTester.Report(false);

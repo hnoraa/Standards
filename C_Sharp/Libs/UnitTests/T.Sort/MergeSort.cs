@@ -92,7 +92,8 @@ namespace T.Sort
         [Test]
         public void SortNullArray()
         {
-            array7.BubbleSort();
+            int length = array6.Length;
+            array7.MergeSort(0, length - 1);
             Assert.IsNull(array7);
         }
     }

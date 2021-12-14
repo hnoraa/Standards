@@ -86,7 +86,7 @@ namespace T.Sort
         [Test]
         public void SortNullArray()
         {
-            array7.BubbleSort();
+            array7.SelectionSort();
             Assert.IsNull(array7);
         }
     }

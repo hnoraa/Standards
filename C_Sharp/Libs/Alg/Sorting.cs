@@ -172,6 +172,12 @@ namespace Alg
         /// <returns>The array sorted</returns>
         public static int[] MergeSort(this int[] array, int left, int right)
         {
+            if (array is null || array.Length == 0)
+                return null;
+
+            if (array.Length == 1)
+                return array;
+
             if (right > left)
             {
                 int middle = left + (right - left) / 2;
@@ -253,33 +259,52 @@ namespace Alg
         /// <returns>The array sorted</returns>
         public static int[] HeapSort(this int[] array)
         {
-            int largest = 0;
+            if (array is null || array.Length == 0)
+                return null;
 
-            for(int i = 0; i <= array.Length; i++) {
-                Heapify(array, i, largest);
+            if (array.Length == 1)
+                return array;
+
+            int length = array.Length;
+
+            for(int i = (length/2); i >= 0; i--) {
+                Heapify(array, i, length);
+            }
+
+            for(int j = length - 1; j > 0; j--)
+            {
+                int temp = array[0];
+                array[0] = array[j];
+                array[j] = temp;
+                Heapify(array, 0, j);
             }
 
             return array;
         }
 
-        private static void Heapify(this int[] array, int index, int largest)
+        private static void Heapify(this int[] array, int index, int length)
         {
-            int root = array[index];
+            int largest = index;
+            int left = 2 * index + 1;
+            int right = 2 * index + 2;
 
-            if (array[2 * index + 1] > array[2 * index + 2])
+            if (left < length && array[left] > array[largest])
             {
-                largest = 2 * index + 1;
-            }
-            else
-            {
-                largest = 2 * index + 2;
+                largest = left;
             }
 
-            if(root != largest)
+            if (right < length && array[right] > array[largest])
             {
-                int temp = root;
-                root = largest;
-                largest = temp;
+                largest = right;
+            }
+
+            if (largest != index)
+            {
+                int temp = array[index];
+                array[index] = array[largest];
+                array[largest] = temp;
+
+                Heapify(array, largest, length);
             }
         }
     }
