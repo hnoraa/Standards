@@ -13,6 +13,7 @@ namespace T.Sort
         public int[] array4 = { 100, 98, 97, 96, 95, 94, 0, 92, 93, 91 };
         public int[] array5 = { 0, 2, 3, 11, 11, 11, 0, 2, 3, 99 };
         public int[] array6 = new int[100000];
+        public int[] array7 = null;
 
         [SetUp]
         public void SetUp()
@@ -86,6 +87,13 @@ namespace T.Sort
             array6.MergeSort(0, length - 1);
             Array.Sort(arrayTest);
             Assert.AreEqual(arrayTest, array6);
+        }
+
+        [Test]
+        public void SortNullArray()
+        {
+            array7.BubbleSort();
+            Assert.IsNull(array7);
         }
     }
 }

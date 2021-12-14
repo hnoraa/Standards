@@ -144,25 +144,14 @@ namespace Alg
             {
                 // step2: for all of the array indices less than i, this compares the key element array[i] to it's predecessors
                 // in these cases, a reverse loop is faster, because it's cheaper to compare j > 0 than it is to compare j < i - 1
-                for (int j = i - 1; j > 0; j--)
+                int key = array[i];
+                int j = i - 1;
+                while (j >= 0 && array[j] > key)
                 {
-                    // step 3: check to see that array[j] is greater than array[i] (the key element)
-                    if (array[j] > array[i])
-                    {
-                        int temp = array[i];
-                        array[i] = array[j];
-                        array[j] = temp;
-                    }
+                    array[j + 1] = array[j];
+                    j = j - 1;  // reverse through subarray
                 }
-                // This reverse while loop is actually faster than the reverse for loop
-                //int key = array[i];
-                //int j = i - 1;
-                //while(j >= 0 && array[j] > key)
-                //{
-                //    array[j + 1] = array[j];
-                //    j = j - 1;  // reverse through subarray
-                //}
-                //array[j + 1] = key;
+                array[j + 1] = key;
             }
 
             return array;

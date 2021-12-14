@@ -6,7 +6,11 @@ namespace DriverConsoleApp
 {
     public static class Program
     {
-        //public static int[] testArray = new int[5];
+        public static int[] array1 = { 0, 0, 0 };
+        public static int[] array2 = { 1 };
+        public static int[] array3 = { 100, 99 };
+        public static int[] array4 = { 100, 98, 97, 96, 95, 94, 0, 92, 93, 91 };
+        public static int[] array5 = { 0, 2, 3, 11, 11, 11, 0, 2, 3, 99 };
 
         public static void Main(string[] args)
         {
@@ -14,30 +18,30 @@ namespace DriverConsoleApp
             //for (int i = 0; i < testArray.Length; i++)
             //    testArray[i] = rand.Next(1, 1000);
 
-            int[] testArray = { 99, 7, 8, 245, 230, 1, 0 };
-            int length = testArray.Length;
+            //int[] testArray = { 99, 7, 8, 245, 230, 1, 0 };
+            //int length = testArray.Length;
             Console.SetWindowSize(120, 40);
-            Console.WriteLine($"Testing with array of size {length}");
 
             BenchMark.BenchMark timeTester = new BenchMark.BenchMark();
 
             timeTester.Start();
 
-            //testArray.MergeSort(0, length - 1);
-            //timeTester.Mark("MergeSort");
+            // insertion sort
+            array1.InsertionSort();
+            Console.WriteLine($"{String.Join(",", array1)}");
 
-            //testArray.SelectionSort();
-            //timeTester.Mark("SelectionSort");
+            array2.InsertionSort();
+            Console.WriteLine($"{String.Join(",", array2)}");
 
-            //testArray.InsertionSort();
-            //timeTester.Mark("InsertionSort");
+            array3.InsertionSort();
+            Console.WriteLine($"{String.Join(",", array3)}");
 
-            //testArray.BubbleSort();
-            //timeTester.Mark("BubbleSort");
+            array4.InsertionSort();
+            Console.WriteLine($"{String.Join(",", array4)}");
 
-            Console.WriteLine($"{String.Join(",", testArray)}");
-            testArray.HeapSort();
-            Console.WriteLine($"{String.Join(",", testArray)}");
+            array5.InsertionSort();
+            Console.WriteLine($"{String.Join(",", array5)}");
+
 
             timeTester.End();
             timeTester.Report(false);
