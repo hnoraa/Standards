@@ -1,9 +1,6 @@
 ﻿/// Sources: 
 /// https://www.geeksforgeeks.org/fundamentals-of-algorithms/
 /// https://travcav.medium.com/why-reverse-loops-are-faster-a09d65473006
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Alg
 {
@@ -43,16 +40,14 @@ namespace Alg
                 // Step 2 find the minimum element in the sub array
                 for (int j = i + 1; j < length; j++)
                 {
-                    if(array[j] < array[min])
+                    if (array[j] < array[min])
                     {
                         min = j;
                     }
                 }
 
                 // Step 3 swap min and i
-                int temp = array[i];
-                array[i] = array[min];
-                array[min] = temp;
+                array.Swap(i, min);
             }
 
             return array;
@@ -94,23 +89,13 @@ namespace Alg
 
             for (int i = 0; i < length; i++)
             {
-                //bool swapped = false;
                 for(int j = i + 1; j < length; j++)
                 {
                     if (array[i] > array[j])
                     {
-                        int temp = array[i];
-                        array[i] = array[j];
-                        array[j] = temp;
-                        //swapped = true;
+                        array.Swap(i, j);
                     }
                 }
-
-                //if(swapped == false)
-                //{
-                //    // optimization, this will break out of the loop if there are no swaps to be performed
-                //    break;
-                //}
             }
 
             return array;
@@ -190,66 +175,6 @@ namespace Alg
         }
 
         /// <summary>
-        /// Merge for merge sort. This is the Conquer of the Divide and Conquer of Merge Sort
-        /// </summary>
-        /// <param name="array"></param>
-        /// <param name="left">The left bound of the array</param>
-        /// <param name="middle">The middle of the array</param>
-        /// <param name="right">The right of the array</param>
-        private static void Merge(this int[] array, int left, int middle, int right)
-        {
-            int n1 = middle - left + 1;
-            int n2 = right - middle;
-            int[] leftArray = new int[n1];
-            int[] rightArray = new int[n2];
-            int i, j = 0;
-
-            for (i = 0; i < n1; i++)
-            {
-                leftArray[i] = array[left + i];
-            }
-
-            for (j = 0; j < n2; j++)
-            {
-                rightArray[j] = array[middle + j + 1];
-            }
-
-            i = j = 0;
-            int k = left;
-
-            // initial copy
-            while (i < n1 && j < n2)
-            {
-                if (leftArray[i] <= rightArray[j])
-                {
-                    array[k] = leftArray[i];
-                    i++;
-                }
-                else
-                {
-                    array[k] = rightArray[j];
-                    j++;
-                }
-                k++;
-            }
-
-            // copy over remainders
-            while (i < n1)
-            {
-                array[k] = leftArray[i];
-                i++;
-                k++;
-            }
-
-            while (j < n2)
-            {
-                array[k] = rightArray[j];
-                j++;
-                k++;
-            }
-        }
-
-        /// <summary>
         /// Heap sort:
         /// Heap sort is a comparison-based sorting technique based on Binary Heap data structure. 
         /// It is similar to selection sort where we first find the minimum element and place 
@@ -268,44 +193,54 @@ namespace Alg
             int length = array.Length;
 
             for(int i = (length/2); i >= 0; i--) {
-                Heapify(array, i, length);
+                array.Heapify(i, length);
             }
 
             for(int j = length - 1; j > 0; j--)
             {
-                int temp = array[0];
-                array[0] = array[j];
-                array[j] = temp;
-                Heapify(array, 0, j);
+                array.Swap(0, j);
+                array.Heapify(0, j);
             }
 
             return array;
         }
 
-        private static void Heapify(this int[] array, int index, int length)
+        /// <summary>
+        /// Quick Sort:
+        /// It picks an element as pivot and partitions the given array around the picked pivot. 
+        /// There are many different versions of quickSort that pick pivot in different ways. 
+        ///
+        /// 1. Always pick first element as pivot.
+        /// 2. Always pick last element as pivot (implemented below).
+        /// 3. Pick a random element as pivot.
+        /// 4. Pick median as pivot.
+        /// 
+        /// The key process in quickSort is partition(). Target of partitions is, given an array and an element x of array as pivot, 
+        /// put x at its correct position in sorted array and put all smaller elements(smaller than x) before x, and put all greater 
+        /// elements(greater than x) after x.
+        /// 
+        /// All this should be done in linear time.
+        /// </summary>
+        /// <param name="array">The un-sorted array</param>
+        /// <param name="low">The low starting index</param>
+        /// <param name="high">The high ending index</param>
+        /// <returns>The array sorted</returns>
+        public static int[] QuickSort(this int[] array, int low, int high)
         {
-            int largest = index;
-            int left = 2 * index + 1;
-            int right = 2 * index + 2;
+            if (array is null || array.Length == 0)
+                return null;
 
-            if (left < length && array[left] > array[largest])
+            if (array.Length == 1)
+                return array;
+
+            if (low < high)
             {
-                largest = left;
-            }
+                int partitionIndex = array.Partition(low, high);
 
-            if (right < length && array[right] > array[largest])
-            {
-                largest = right;
+                array.QuickSort(low, partitionIndex - 1);
+                array.QuickSort(partitionIndex + 1, high);
             }
-
-            if (largest != index)
-            {
-                int temp = array[index];
-                array[index] = array[largest];
-                array[largest] = temp;
-
-                Heapify(array, largest, length);
-            }
+            return array;
         }
     }
 }
