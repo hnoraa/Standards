@@ -6,11 +6,8 @@ namespace DriverConsoleApp
 {
     public static class Program
     {
-        public static int[] array1 = { 0, 0, 0 };
-        public static int[] array2 = { 1 };
-        public static int[] array3 = { 100, 99 };
-        public static int[] array4 = { 100, 98, 97, 96, 95, 94, 0, 92, 93, 91 };
-        public static int[] array5 = { 0, 2, 3, 11, 11, 11, 0, 2, 3, 99 };
+        //public static int[] list = { 82, 901, 100, 12, 150, 77, 55, 23 };
+        public static int[] list = { 9, 7, 3, 2, 3, 3, 2, 1, 0, 7, 8, 6, 9, 9, 9 };
 
         public static void Main(string[] args)
         {
@@ -18,32 +15,68 @@ namespace DriverConsoleApp
             //for (int i = 0; i < testArray.Length; i++)
             //    testArray[i] = rand.Next(1, 1000);
 
-            //int[] testArray = { 99, 7, 8, 245, 230, 1, 0 };
-            //int length = testArray.Length;
             Console.SetWindowSize(120, 40);
+            Console.WriteLine($"list: {String.Join(",", list)}");
+            //BenchMark.BenchMark timeTester = new BenchMark.BenchMark();
 
-            BenchMark.BenchMark timeTester = new BenchMark.BenchMark();
+            //timeTester.Start();
 
-            timeTester.Start();
+            list.CountingSort();
+            Console.WriteLine($"list: {String.Join(",", list)}");
+            //timeTester.End();
+            //timeTester.Report(false);
+        }
 
-            // insertion sort
-            array1.QuickSort(0, array1.Length-1);
-            Console.WriteLine($"{String.Join(",", array1)}");
+        public static int GetMax(this int[] array)
+        {
+            int length = array.Length - 1;
+            int max = array[0];
+            for(int i = length; i >= 0; i--)
+            {
+                if(array[i] > max)
+                {
+                    max = array[i];
+                }
+            }
+            return max;
+        }
+    
+        public static int[] CountingSort(this int[] array)
+        {
+            int length = array.Length;
+            int max = array.GetMax();
+            int[] counts = new int[max + 1];
+            int[] output = new int[max + 1];
 
-            array2.QuickSort(0, array2.Length-1);
-            Console.WriteLine($"{String.Join(",", array2)}");
+            for(int i = 0; i < length; i++)
+            {
+                for(int j = 0; j < counts.Length; j++)
+                {
+                    if(array[i] == j)
+                    {
+                        counts[j]++;
+                    }
+                }
+            }
 
-            array3.QuickSort(0, array3.Length-1);
-            Console.WriteLine($"{String.Join(",", array3)}");
+            Console.WriteLine($"{String.Join(",", counts)}");
 
-            array4.QuickSort(0, array4.Length-1);
-            Console.WriteLine($"{String.Join(",", array4)}");
+            for (int k = 1; k < counts.Length; k++)
+            {
+                counts[k] += counts[k - 1];
+            }
 
-            array5.QuickSort(0, array5.Length-1);
-            Console.WriteLine($"{String.Join(",", array5)}");
+            Console.WriteLine($"{String.Join(",", counts)}");
 
-            timeTester.End();
-            timeTester.Report(false);
+            for (int x = output.Length - 1; x >= 0; x--)
+            {
+                output[array[x]] = array[x];
+                //counts[array[x]]--;
+            }
+
+            Console.WriteLine($"{String.Join(",", output)}");
+
+            return array;
         }
     }
 }

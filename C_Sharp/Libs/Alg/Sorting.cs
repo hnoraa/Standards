@@ -242,5 +242,23 @@ namespace Alg
             }
             return array;
         }
+
+        public static int[] RadixSort(this int[] array)
+        {
+            if (array is null || array.Length == 0)
+                return null;
+
+            if (array.Length == 1)
+                return array;
+
+            int length = array.Length;
+            int max = array.GetMax();
+
+            for (int i = 0; i < max; i++)
+            {
+
+            }
+            return array;
+        }
     }
 }

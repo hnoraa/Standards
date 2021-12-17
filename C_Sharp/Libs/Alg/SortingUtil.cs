@@ -148,5 +148,25 @@ namespace Alg
             array.Swap((i + 1), high);
             return (i + 1);
         }
+
+        /// <summary>
+        /// Get the max number (largest number) of an array.
+        /// </summary>
+        /// <param name="array">The un-sorted array</param>
+        /// <returns>The largest number in the array</returns>
+        public static int GetMax(this int[] array)
+        {
+            int max = array[0];
+
+            for(int i = 0; i < array.Length; i++)
+            {
+                if(array[i] > max)
+                {
+                    max = array[i];
+                }
+            }
+
+            return max;
+        }
     }
 }
